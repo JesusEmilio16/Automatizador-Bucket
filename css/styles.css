@@ -1,0 +1,73 @@
+/* styles.css - estilo sencillo */
+:root{
+  --max-width: 980px;
+  --accent: #1f2937;
+  --muted: #6b7280;
+  --bg: #ffffff;
+  --pad: 24px;
+}
+
+*{box-sizing: border-box}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  background: var(--bg);
+  color: var(--accent);
+  padding: var(--pad);
+  line-height: 1.4;
+}
+
+.small {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 6px 0 8px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 8px 0 18px;
+  color: var(--muted);
+}
+
+/* Contenedor centrado */
+.img-wrap{
+  max-width: var(--max-width);
+  margin: 0;
+  padding: 8px 0 24px;
+}
+
+/* Imagen responsiva y con borde sutil */
+img#catImg{
+  display: block;
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(31,41,55,0.06);
+}
+
+/* Estado de la imagen (carga / error) */
+.img-status{
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Botón sencillo */
+.controls{
+  margin-top: 18px;
+}
+button{
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+button:hover{ box-shadow: 0 3px 8px rgba(0,0,0,0.06) }
