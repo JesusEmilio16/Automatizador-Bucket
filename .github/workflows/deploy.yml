@@ -1,27 +1,29 @@
-name: MinTic Deploy to AWS CloudFormation
+name: Upload Web Project to S3
 
 on:
   push:
-    branches: [master]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
-  deploy:
+  upload:
     runs-on: ubuntu-latest
-
     steps:
-    - name: MinTic Checkout and download repository
-      uses: actions/checkout@v3
 
-    - name: MinTic Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Deploy EC2
-      run: aws cloudformation deploy --template-file templates/ec2.yml --stack-name MinTicEC2Stack
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-    - name: Deploy S3
-      run: aws cloudformation deploy --template-file templates/s3.yml --stack-name MinTicS3
+      - name: Zip project
+        run: |
+          zip -r project.zip .
+
+      - name: Upload zipped project to S3
+        run: |
+          aws s3 cp project.zip s3://mintic-bucket-838319851099-us-east-1/project.zip
